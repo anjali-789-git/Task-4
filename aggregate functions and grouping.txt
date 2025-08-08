@@ -1,0 +1,60 @@
+//on single table
+
+select count(productid) from productcategory;
+ select sum(price) from orderdetails;
+ select avg(price) from orderdetails;
+select max(price) from orderdetails;
+select min(price) from orderdetails;
+
+
+//on multiple tables
+
+SELECT 
+    c.Name AS CustomerName,
+    SUM(o.TotalAmount) AS TotalSpent
+FROM Orders o
+JOIN Customers c ON o.CustomerID = c.CustomerID
+GROUP BY c.CustomerID, c.Name;
+
+
+
+SELECT 
+    c.Name AS CustomerName,
+    COUNT(o.OrderID) AS NumberOfOrders
+FROM Orders o
+JOIN Customers c ON o.CustomerID = c.CustomerID
+GROUP BY c.CustomerID, c.Name;
+
+
+
+SELECT 
+    cat.CategoryName,
+    AVG(p.Price) AS AveragePrice
+FROM Products p
+JOIN ProductCategory pc ON p.ProductID = pc.ProductID
+JOIN Categories cat ON pc.CategoryID = cat.CategoryID
+GROUP BY cat.CategoryID, cat.CategoryName;
+
+
+
+SELECT 
+    c.Name AS CustomerName,
+    SUM(o.TotalAmount) AS TotalSpent
+FROM Orders o
+JOIN Customers c ON o.CustomerID = c.CustomerID
+GROUP BY c.CustomerID, c.Name
+HAVING SUM(o.TotalAmount) > 1000;
+
+
+
+SELECT 
+    cat.CategoryName,
+    MAX(p.Stock) AS MaxStock,
+    MIN(p.Stock) AS MinStock
+FROM Products p
+JOIN ProductCategory pc ON p.ProductID = pc.ProductID
+JOIN Categories cat ON pc.CategoryID = cat.CategoryID
+GROUP BY cat.CategoryName;
+
+
+
